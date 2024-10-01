@@ -12,13 +12,7 @@ resource "azurerm_virtual_network" "vnets" {
   resource_group_name = each.value.resource_group_name
   address_space       = each.value.address_space
 
-  # dynamic "subnet" {
-  #   for_each = each.value.subnets
-  #   content {
-  #     name             = subnet.key
-  #     address_prefixes = subnet.value
-  #   }
-  # }
+
 }
 
 resource "azurerm_subnet" "subnets" {
@@ -46,6 +40,7 @@ resource "azurerm_network_interface" "nic1" {
     name                          = "internal"
     subnet_id                     = azurerm_subnet.subnets[each.value.subnet_key].id
     private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = azurerm_public_ip.pips[each.value.pip_key].id
   }
 }
 
@@ -113,6 +108,13 @@ resource "azurerm_network_interface_security_group_association" "nic_nsg_associa
 }
 
 
+resource "azurerm_public_ip" "pips" {
+  for_each            = var.piplist
+  name                = each.value.name
+  resource_group_name = each.value.resource_group_name
+  location            = each.value.location
+  allocation_method   = each.value.allocation_method
+}
 
 
 

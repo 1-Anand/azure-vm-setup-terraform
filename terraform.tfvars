@@ -47,6 +47,7 @@ niclist = {
     location            = "centralindia"
     subnet_key          = "bhushan_subnet1"
     nsg_key             = "nsg1"  # This associates NIC with the NSG
+    pip_key             = "bhushan_pip1"
   }
 }
 
