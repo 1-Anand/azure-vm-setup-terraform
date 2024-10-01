@@ -109,6 +109,7 @@ resource "azurerm_network_interface_security_group_association" "nic_nsg_associa
 
 
 resource "azurerm_public_ip" "pips" {
+  depends_on = [ azurerm_resource_group.rgs ]
   for_each            = var.piplist
   name                = each.value.name
   resource_group_name = each.value.resource_group_name
