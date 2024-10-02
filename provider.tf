@@ -18,5 +18,5 @@ provider "azurerm" {
   features {
 
   }
-  subscription_id = "55071ba7-3ef9-4ff3-84d2-29d88b809397"
+  subscription_id = "****"
 }
